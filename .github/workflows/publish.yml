@@ -1,6 +1,9 @@
 name: Publish Helm Chart
 
 on:
+  push:
+    branches:
+      - main
   repository_dispatch:
 
 jobs:
