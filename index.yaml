@@ -3,12 +3,12 @@ entries:
   eks-pod-identity-webhook:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-06-06T18:14:44.926124539Z"
+    created: "2025-06-06T19:02:02.657648286Z"
     description: Helm chart for deploying the EKS Pod Identity Webhook
-    digest: 6f8d300e0adfb0f7d365c9610026e0901845f8e7116460656dc2625743207ce1
+    digest: d7e4b242d9e6145513ba792557b0676db22a007dee0c6b73bd09c95aeacf8bdd
     name: eks-pod-identity-webhook
     type: application
     urls:
     - https://mondu-ai.github.io/helm-charts-community/eks-pod-identity-webhook-0.1.1.tgz
     version: 0.1.1
-generated: "2025-06-06T18:14:44.925688203Z"
+generated: "2025-06-06T19:02:02.656834985Z"
