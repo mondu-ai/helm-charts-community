@@ -22,10 +22,19 @@ jobs:
           mkdir -p public
           if git ls-remote --exit-code origin gh-pages; then
             git fetch origin gh-pages
-            git show origin/gh-pages:index.yaml > public/index.yaml || true
+            # Attempt to get the old index, but don't fail if it doesn't exist or gh-pages branch is empty
+            git show origin/gh-pages:index.yaml > public/index.yaml || echo "No existing index.yaml found or gh-pages is empty."
           fi
-          helm package charts/eks-pod-identity-webhook -d public
-          if [ -f public/index.yaml ]; then
+
+          # Loop through each directory in charts/ and package it
+          for chart_dir in charts/*/; do
+            if [ -d "$chart_dir" ]; then
+              echo "Packaging chart in $chart_dir"
+              helm package "$chart_dir" -d public
+            fi
+          done
+
+          if [ -f public/index.yaml ] && [ -s public/index.yaml ]; then # Check if index.yaml exists and is not empty
             helm repo index public --url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" --merge public/index.yaml
           else
             helm repo index public --url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
