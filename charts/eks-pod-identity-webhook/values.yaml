@@ -7,7 +7,7 @@ image:
 
 serviceAccount:
   create: true
-  name: aws-pod-identity-webhook-sa
+  name: eks-pod-identity-webhook-sa
 
 
 certManager:
