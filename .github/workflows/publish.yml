@@ -1,0 +1,36 @@
+name: Publish Helm Chart
+
+on:
+  repository_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.13.0
+      - name: Prepare chart
+        run: |
+          mkdir -p public
+          if git ls-remote --exit-code origin gh-pages; then
+            git fetch origin gh-pages
+            git show origin/gh-pages:index.yaml > public/index.yaml || true
+          fi
+          helm package charts/eks-pod-identity-webhook -d public
+          if [ -f public/index.yaml ]; then
+            helm repo index public --url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" --merge public/index.yaml
+          else
+            helm repo index public --url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          fi
+      - name: Publish
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          keep_files: true
