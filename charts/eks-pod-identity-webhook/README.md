@@ -38,7 +38,7 @@ The following table lists the most commonly used parameters of the chart. See
 | `image.repository` | Container image repository | `ghcr.io/mondu-ai/eks-pod-identity-webhook` |
 | `image.tag` | Image tag | `latest` |
 | `serviceAccount.create` | Create a service account | `true` |
-| `serviceAccount.name` | Service account name | `aws-pod-identity-webhook-sa` |
+| `serviceAccount.name` | Service account name | `eks-pod-identity-webhook-sa` |
 | `certManager.enabled` | Manage certificates with cert-manager | `true` |
 | `existingTLSSecret` | Use an existing TLS secret | `""` |
 | `service.port` | Webhook service port | `443` |
