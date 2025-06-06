@@ -17,6 +17,12 @@ jobs:
         uses: azure/setup-helm@v3
         with:
           version: v3.13.0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install PyYAML
+        run: pip install PyYAML
       - name: Prepare chart
         run: |
           mkdir -p public
@@ -39,6 +45,8 @@ jobs:
           else
             helm repo index public --url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
           fi
+      - name: Generate static HTML page
+        run: python .github/scripts/generate_static_html.py
       - name: Publish
         uses: peaceiris/actions-gh-pages@v3
         with:
