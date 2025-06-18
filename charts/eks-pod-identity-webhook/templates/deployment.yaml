@@ -25,7 +25,7 @@ spec:
       containers:
         - name: webhook
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ if eq .Values.image.tag "latest" }}Always{{ else }}IfNotPresent{{ end }}
           args:
             - "--tls-cert-path=/etc/webhook/certs/tls.crt"
             - "--tls-key-path=/etc/webhook/certs/tls.key"

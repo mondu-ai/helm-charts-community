@@ -3,7 +3,6 @@ replicaCount: 3
 image:
   repository: ghcr.io/mondu-ai/eks-pod-identity-webhook
   tag: latest
-  pullPolicy: IfNotPresent
 
 serviceAccount:
   create: true
