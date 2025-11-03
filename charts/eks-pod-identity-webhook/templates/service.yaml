@@ -6,6 +6,9 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "eks-pod-identity-webhook.name" . }}
     app.kubernetes.io/instance: {{ include "eks-pod-identity-webhook.fullname" . }}
+  {{- if .Values.service.annotations }}
+  annotations: {{ toYaml .Values.service.annotations | nindent 4 }}
+  {{- end }}
 spec:
   selector:
     app.kubernetes.io/name: {{ include "eks-pod-identity-webhook.name" . }}
