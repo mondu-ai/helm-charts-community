@@ -21,6 +21,7 @@ existingTLSSecret: ""
 
 service:
   port: 443
+  annotations: {}
 
 nodeSelector:
   kubernetes.io/arch: arm64
