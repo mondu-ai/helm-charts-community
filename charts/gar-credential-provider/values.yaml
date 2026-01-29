@@ -1,0 +1,33 @@
+image:
+  repository: ghcr.io/mondu-ai/gar-credential-provider
+  tag: latest
+  pullPolicy: Always
+
+# GCP Workload Identity Federation configuration
+gcp:
+  # Required: Workload Identity Pool provider resource name
+  # Format: //iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
+  audience: ""
+
+  # Required: GCP service account email to impersonate
+  # This SA must have roles/artifactregistry.reader on your GAR repos
+  serviceAccountEmail: ""
+
+# Registry patterns to match (comma-separated)
+registries: "*.pkg.dev"
+
+# Node selector for DaemonSet pods
+nodeSelector: {}
+
+# Tolerations to run on all nodes including tainted ones
+tolerations:
+  - operator: Exists
+
+# Resource limits for setup pod
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 50m
+    memory: 32Mi
