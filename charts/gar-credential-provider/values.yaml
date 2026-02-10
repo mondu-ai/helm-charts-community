@@ -23,7 +23,7 @@ nodeSelector: {}
 tolerations:
   - operator: Exists
 
-# Resource limits for setup pod
+# Resource limits for DaemonSet pod
 resources:
   limits:
     cpu: 100m

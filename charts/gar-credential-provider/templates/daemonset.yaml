@@ -17,18 +17,6 @@ spec:
         # Force pod recreation when config changes
         checksum/config: {{ include "gar-credential-provider.gcpConfig" . | sha256sum }}
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              # Only schedule on nodes WITHOUT this label
-              # After setup completes, node gets labeled and pod won't reschedule
-              - key: gar-credential-provider/configured
-                operator: NotIn
-                values:
-                - "{{ .Values.image.tag }}"
-      serviceAccountName: {{ include "gar-credential-provider.fullname" . }}
       hostPID: true
       {{- with .Values.tolerations }}
       tolerations:
@@ -44,12 +32,6 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command: ["/gar-credential-provider", "setup"]
         env:
-        - name: NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.nodeName
-        - name: VERSION
-          value: "{{ .Values.image.tag }}"
         - name: GCP_CONFIG
           value: {{ include "gar-credential-provider.gcpConfig" . | fromJson | toJson | quote }}
         - name: REGISTRIES
