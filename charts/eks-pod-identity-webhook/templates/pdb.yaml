@@ -1,0 +1,16 @@
+{{- if and .Values.pdb (.Values.pdb).enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "eks-pod-identity-webhook.fullname" . }}-pdb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "eks-pod-identity-webhook.name" . }}
+    app.kubernetes.io/instance: {{ include "eks-pod-identity-webhook.fullname" . }}
+spec:
+  maxUnavailable: {{ .Values.pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "eks-pod-identity-webhook.name" . }}
+      app.kubernetes.io/instance: {{ include "eks-pod-identity-webhook.fullname" . }}
+{{- end }}

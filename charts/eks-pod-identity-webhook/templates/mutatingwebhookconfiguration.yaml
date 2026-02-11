@@ -12,7 +12,7 @@ webhooks:
   - name: aws-pod-identity-webhook.mondu.internal
     admissionReviewVersions: ["v1"]
     sideEffects: None
-    failurePolicy: Fail
+    failurePolicy: {{ (.Values.webhook).failurePolicy | default "Ignore" }}
     clientConfig:
       service:
         namespace: {{ .Release.Namespace }}

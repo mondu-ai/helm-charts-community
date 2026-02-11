@@ -1,5 +1,17 @@
 replicaCount: 3
 
+webhook:
+  failurePolicy: Ignore
+
+pdb:
+  enabled: true
+  maxUnavailable: 1
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+
 image:
   repository: ghcr.io/mondu-ai/eks-pod-identity-webhook
   tag: latest
