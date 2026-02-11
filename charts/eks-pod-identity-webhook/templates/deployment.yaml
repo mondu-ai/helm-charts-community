@@ -74,3 +74,15 @@ spec:
         fsGroup: 1000
       affinity:
 {{ toYaml .Values.affinity | indent 8 }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- range .Values.topologySpreadConstraints }}
+        - maxSkew: {{ .maxSkew }}
+          topologyKey: {{ .topologyKey }}
+          whenUnsatisfiable: {{ .whenUnsatisfiable }}
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: {{ include "eks-pod-identity-webhook.name" $ }}
+              app.kubernetes.io/instance: {{ include "eks-pod-identity-webhook.fullname" $ }}
+        {{- end }}
+      {{- end }}
