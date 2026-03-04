@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   eks-pod-identity-webhook:
   - apiVersion: v2
+    appVersion: 0.1.4
+    created: "2026-03-04T12:13:34.182461262Z"
+    description: Helm chart for deploying the EKS Pod Identity Webhook
+    digest: a6514e218f2c63c105dad10474fe4cc166dd4c9e9d51c5bbb4387fe646a574ea
+    name: eks-pod-identity-webhook
+    type: application
+    urls:
+    - https://mondu-ai.github.io/helm-charts-community/eks-pod-identity-webhook-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     appVersion: 0.1.2
     created: "2026-02-11T18:23:20.049994656Z"
     description: Helm chart for deploying the EKS Pod Identity Webhook
@@ -43,6 +53,16 @@ entries:
     version: 0.1.1
   gar-credential-provider:
   - apiVersion: v2
+    appVersion: 0.2.1
+    created: "2026-03-04T12:13:34.182693469Z"
+    description: Install GAR credential provider on Kubernetes nodes via DaemonSet
+    digest: 6439b64b1583a2137fe3ebbce5d84bc3109f1a665183cd24f73430816eae7be0
+    name: gar-credential-provider
+    type: application
+    urls:
+    - https://mondu-ai.github.io/helm-charts-community/gar-credential-provider-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 0.2.0
     created: "2026-02-11T18:23:20.050236148Z"
     description: Install GAR credential provider on Kubernetes nodes via DaemonSet
@@ -62,4 +82,4 @@ entries:
     urls:
     - https://mondu-ai.github.io/helm-charts-community/gar-credential-provider-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-11T18:23:20.049497485Z"
+generated: "2026-03-04T12:13:34.181934771Z"
