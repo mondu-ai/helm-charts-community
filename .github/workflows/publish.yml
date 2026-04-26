@@ -16,10 +16,11 @@ jobs:
       - name: Set up Helm
         run: |
           HELM_VERSION="v3.13.0"
-          curl -fsSL "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" -o /tmp/helm.tar.gz
-          curl -fsSL "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz.sha256sum" -o /tmp/helm.sha256
+          HELM_TARBALL="helm-${HELM_VERSION}-linux-amd64.tar.gz"
+          curl -fsSL "https://get.helm.sh/${HELM_TARBALL}" -o "/tmp/${HELM_TARBALL}"
+          curl -fsSL "https://get.helm.sh/${HELM_TARBALL}.sha256sum" -o /tmp/helm.sha256
           cd /tmp && sha256sum -c helm.sha256
-          tar -xzf /tmp/helm.tar.gz -C /tmp
+          tar -xzf "/tmp/${HELM_TARBALL}" -C /tmp
           sudo mv /tmp/linux-amd64/helm /usr/local/bin/helm
           helm version
       - name: Set up Python
