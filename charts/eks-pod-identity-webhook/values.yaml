@@ -1,7 +1,15 @@
 replicaCount: 3
 
+# How long a stopping replica waits for kube-apiserver to close its keep-alive connections; above its 90s idle timeout.
+shutdownDrainTimeout: 100s
+# Must cover shutdownDrainTimeout plus the webhook's 5s shutdown.
+terminationGracePeriodSeconds: 120
+
 webhook:
   failurePolicy: Ignore
+  # Pods in these namespaces are admitted without calling the webhook.
+  excludedNamespaces:
+    - kube-system
 
 pdb:
   enabled: true
@@ -14,7 +22,7 @@ topologySpreadConstraints:
 
 image:
   repository: ghcr.io/mondu-ai/eks-pod-identity-webhook
-  tag: latest
+  tag: "0.3.0"
 
 serviceAccount:
   create: true
