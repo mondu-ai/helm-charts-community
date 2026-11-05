@@ -20,6 +20,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       automountServiceAccountToken: true
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
       containers:
@@ -38,6 +39,8 @@ spec:
           env:
             - name: GIN_MODE
               value: {{ .Values.env.GIN_MODE }}
+            - name: SHUTDOWN_DRAIN_TIMEOUT
+              value: {{ .Values.shutdownDrainTimeout | quote }}
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
